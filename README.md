@@ -56,6 +56,38 @@ mlops-project-1/
 	pip install -r requirements.txt
 	```
 
+## Dockerized Workflow (Recommended)
+All steps below are performed from the project root. This workflow ensures reproducibility and clean separation of environments.
+
+### 1. Build the Docker image:
+`docker build -f docker/Dockerfile -t titanic-inference .``
+
+### 2. Train the model inside Docker:
+`docker run -it --rm \
+  -v $PWD/mlruns:/app/mlruns \
+  -v $PWD/mlflow.db:/app/mlflow.db \
+  -v $PWD/data:/app/data \
+  titanic-inference python src/train.py`
+
+This will create all necessary experiemtn and model artifact in mounted volumes.
+
+### 3. Start the MLflow UI inside Docker:
+`docker run -p 5001:5001 \
+  -v $PWD/mlruns:/app/mlruns \
+  -v $PWD/mlflow.db:/app/mlflow.db \
+  titanic-inference mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5001 --host 0.0.0.0`
+
+- Access at http://localhost:5001
+- Regiter the trained model in the Model Registry from a run created inside the container
+
+### 4. Run the FastAPI inference service inside Docker:
+`docker run -p 8000:8000 \
+  -v $PWD/mlruns:/app/mlruns \
+  -v $PWD/mlflow.db:/app/mlflow.db \
+  titanic-inference`
+
+- The API will be available at http://localhost:8000
+- Interactive docs: http://localhost:8000/docs
 
 ## Usage
 

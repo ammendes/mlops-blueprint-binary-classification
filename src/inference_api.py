@@ -23,7 +23,16 @@ with open(os.path.join(os.path.dirname(__file__), '../config.yaml'), 'r') as f:
 app = FastAPI()
 
 # Load model from MLflow using config
-mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
+
+# Set MLflow tracking URI to use relative path for SQLite DB
+tracking_uri = config['mlflow']['tracking_uri']
+if tracking_uri.startswith("sqlite:///"):
+    # Ensure path is relative for Docker
+    db_path = tracking_uri.replace("sqlite:///", "")
+    tracking_uri = f"sqlite:///./{os.path.basename(db_path)}"
+mlflow.set_tracking_uri(tracking_uri)
+
+# Load model from MLflow Model Registry
 model_uri = f"models:/{config['mlflow']['model_name']}/{config['mlflow']['registry_stage']}"
 model = mlflow.sklearn.load_model(model_uri)
 
