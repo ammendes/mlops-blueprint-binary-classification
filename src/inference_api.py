@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import mlflow
 import numpy as np
+import yaml
+import os
 
 class TitanicInput(BaseModel):
     Pclass: int
@@ -13,12 +15,17 @@ class TitanicInput(BaseModel):
     Embarked_Q: int
     Embarked_S: int
 
+ # Load config
+with open(os.path.join(os.path.dirname(__file__), '../config.yaml'), 'r') as f:
+    config = yaml.safe_load(f)
+
 # Initialize FastAPI server
 app = FastAPI()
 
-# Load model from MLflow
-mlflow.set_tracking_uri("sqlite:///mlflow.db")
-model = mlflow.sklearn.load_model("models:/titanic_rf_model/1")
+# Load model from MLflow using config
+mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
+model_uri = f"models:/{config['mlflow']['model_name']}/{config['mlflow']['registry_stage']}"
+model = mlflow.sklearn.load_model(model_uri)
 
 @app.post("/predict")
 def predict(input: TitanicInput):

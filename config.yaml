@@ -1,0 +1,28 @@
+data:
+  dataset_url: "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+  local_path: "data/titanic.csv"
+  features: ["Pclass", "Age", "SibSp", "Parch", "Fare", "Sex_male", "Embarked_Q", "Embarked_S"]
+  fillna:
+    Age: median
+    Fare: median
+    Embarked: 'S'
+
+model:
+  type: "RandomForestClassifier"
+  params:
+    n_estimators: 100
+    max_depth: 5
+    random_state: 42
+
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "default"
+  model_name: "titanic_rf_model"
+  registry_stage: "1"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+artifacts:
+  tmp_dir: "tmp"

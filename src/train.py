@@ -8,30 +8,30 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import shutil
+import yaml
 
 def main():
-    
+    # Load config
+    with open(os.path.join(os.path.dirname(__file__), '../config.yaml'), 'r') as f:
+        config = yaml.safe_load(f)
+
     # Create a temporary directory for artifacts
-    tmp_dir = os.path.join(os.path.dirname(__file__), "../tmp")
+    tmp_dir = os.path.join(os.path.dirname(__file__), f"../{config['artifacts']['tmp_dir']}")
     os.makedirs(tmp_dir, exist_ok=True)
 
-    # Hyperparameters
-    params = {
-        "n_estimators": 100,
-        "max_depth": 5,
-        "random_state": 42,
-    }
+    # Hyperparameters from config
+    params = config['model']['params']
 
     # Load data
     print(f"Loading data...")
     X_train, X_test, y_train, y_test = load_data()
     print(f"Data loaded. Training samples: {X_train.shape[0]}, Test samples: {X_test.shape[0]}")
 
-    # Set the tracking URI to a SQLite format database
-    mlflow.set_tracking_uri("sqlite:///mlflow.db")
-    
-    # Set MLflow experiment (if not found, MLflow createsa new one)
-    mlflow.set_experiment("default")
+    # Set the tracking URI to a SQLite format database from config
+    mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
+
+    # Set MLflow experiment from config
+    mlflow.set_experiment(config['mlflow']['experiment_name'])
 
     # Start MLflow run
     with mlflow.start_run():
