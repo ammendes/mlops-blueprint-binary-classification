@@ -116,7 +116,7 @@ def test_mlflow_logging_functions_called(mlflow_run_dir):
 def test_model_and_metrics_artifacts_created(mlflow_run_dir):
     """Test that model and metrics artifacts are created in the MLflow run and model registry directories."""
     latest_run_dir, latest_run_id = mlflow_run_dir
-    mlruns_dir = os.path.join(os.getcwd(), "mlruns", "1")
+    mlruns_dir = "mlruns/1"
     # Check for metrics artifacts (plots)
     model_files = ["MLmodel", "model.pkl", "conda.yaml", "python_env.yaml", "requirements.txt"]
     model_registry_dir = os.path.join(mlruns_dir, "models")
