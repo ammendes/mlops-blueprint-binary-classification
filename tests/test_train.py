@@ -9,16 +9,16 @@ import time
 
 @pytest.fixture(scope="session")
 def mlflow_run_dir():
-    # Run training once for all tests
     main()
-    run_dir = "mlruns/1/"
+    client = mlflow.tracking.MlflowClient()
+    experiment = client.get_experiment_by_name("my_experiment")
+    experiment_id = experiment.experiment_id
+    run_dir = f"mlruns/{experiment_id}/"
     subdirs = [d for d in os.listdir(run_dir) if os.path.isdir(os.path.join(run_dir, d)) and d != "models"]
     assert subdirs, "No run subdirectories found."
-    # Select latest run by creation time
     latest_run_id = max(subdirs, key=lambda d: os.path.getctime(os.path.join(run_dir, d)))
     latest_run_dir = os.path.join(run_dir, latest_run_id)
     yield latest_run_dir, latest_run_id
-    # Cleanup after all tests
     if os.path.isdir(latest_run_dir):
         shutil.rmtree(latest_run_dir)
 
@@ -61,7 +61,10 @@ def run_training_with_csv(csv_path):
     with open("config.yaml", "w") as f:
         yaml.dump(config, f)
     main()
-    run_dir = "mlruns/1/"
+    client = mlflow.tracking.MlflowClient()
+    experiment = client.get_experiment_by_name(config["mlflow"]["experiment_name"])
+    experiment_id = experiment.experiment_id
+    run_dir = f"mlruns/{experiment_id}/"
     subdirs = [d for d in os.listdir(run_dir) if os.path.isdir(os.path.join(run_dir, d)) and d != "models"]
     assert subdirs, "No run subdirectories found."
     latest_run_id = max(subdirs, key=lambda d: os.path.getctime(os.path.join(run_dir, d)))

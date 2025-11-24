@@ -31,17 +31,16 @@ def main():
     mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
 
     # Set MLflow experiment from config
-    mlflow.set_experiment(config['mlflow']['experiment_name'])
+    experiment_name = config['mlflow']['experiment_name']
+    mlflow.set_experiment(experiment_name)
 
-    # Get artifact location from env or config, handle literal string from config.yaml
-    artifact_location = os.environ.get("MLFLOW_ARTIFACT_LOCATION")
-    if not artifact_location:
-        raw_location = config['mlflow'].get('artifact_location', './mlruns')
-        # If config contains a literal string with env expansion, use default
-        if raw_location.startswith('${MLFLOW_ARTIFACT_LOCATION'):
-            artifact_location = './mlruns'
-        else:
-            artifact_location = raw_location
+    # Get artifact location from config, expand environment variables, and fallback to ./mlruns
+    raw_location = config['mlflow'].get('artifact_location', './mlruns')
+    artifact_location = os.path.expandvars(raw_location)
+    if not artifact_location or artifact_location.startswith('${'):
+        artifact_location = './mlruns'
+    print(f"Resolved MLflow artifact location: {artifact_location}")
+    print(f"MLflow experiment name: {experiment_name}")
 
     # Start MLflow run
     with mlflow.start_run():
@@ -122,5 +121,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-        

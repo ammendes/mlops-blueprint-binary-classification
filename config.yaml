@@ -21,7 +21,7 @@ data:
   local_path: tests/synthetic_known.csv
 mlflow:
   artifact_location: ${MLFLOW_ARTIFACT_LOCATION:-./mlruns}
-  experiment_name: default
+  experiment_name: my_experiment
   model_name: titanic_rf_model
   registry_stage: '1'
   tracking_uri: sqlite:///mlflow.db
