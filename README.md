@@ -60,7 +60,7 @@ mlops-blueprint-binary-classification/
 
 1. **Clone the repository:**
 	```sh
-	git clone https://github.com/ammendes/mlops-blueprint-binary-classification>
+	git clone https://github.com/ammendes/mlops-blueprint-binary-classification
     cd mlops-blueprint-binary-classification
 	```
 
