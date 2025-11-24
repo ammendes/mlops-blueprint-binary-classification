@@ -5,7 +5,7 @@
 [![GitHub license](https://img.shields.io/github/license/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/stargazers)
 ![GitHub forks](https://img.shields.io/github/forks/ammendes/mlops-blueprint-binary-classification?style=social)
-
+![Coverage](https://img.shields.io/codecov/c/github/ammendes/mlops-blueprint-binary-classification/main?label=coverage)
 
 Welcome to a robust, production-ready MLOps template for binary classification, built around the Titanic dataset. This project is designed for data scientists, ML engineers, and teams seeking a practical, end-to-end workflow for collaborative, reproducible machine learning. It demonstrates best practices in data ingestion, preprocessing, model training, evaluation, experiment tracking, and deployment using MLflow, Docker, and FastAPI.
 
