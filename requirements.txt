@@ -11,3 +11,4 @@ uvicorn
 pydantic
 numpy
 pyyaml
+pytest

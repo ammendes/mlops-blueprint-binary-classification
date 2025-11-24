@@ -204,10 +204,23 @@ Make sure you are in the project root directory before running any `make`command
 - **Artifacts:** Metrics, plots, and reports are logged to organized subdirectories in MLflow (`plots/`, `reports/`).
 - **Model:** Saved in MLflow’s MLmodel format for easy deployment or reproducibility.
 
-## Cleaning Up
+## Testing
 
-- Temporary files are saved in `tmp/` during each run and automatically deleted after logging to MLflow.
-- The `mlruns/` folder is managed by MLflow and should be added to `.gitignore`.
+Unit and integration tests are provided to ensure reliability of data loading, preprocessing, and model training components.
+
+- **Run all tests:**
+    ```sh
+    PYTHONPATH=. pytest
+    ```
+
+**Setup:**  
+Make sure you have installed all dependencies and activated your Python environment before running tests.
+
+**Notes:**  
+Some tests (e.g., data download) may require internet access and will temporarily rename the dataset file to verify download logic. All files are restored after tests complete.
+
+Test results will be shown in the terminal. All tests should pass for a healthy codebase.
+
 
 ---
 ## License

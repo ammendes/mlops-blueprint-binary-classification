@@ -1,0 +1,2 @@
+PassengerId,Survived,Pclass,Name,Sex,Age,Fare,Embarked
+1,0,3,Braund, Mr. Owen Harris,male,22,7.25,S
