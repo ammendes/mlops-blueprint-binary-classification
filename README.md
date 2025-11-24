@@ -1,6 +1,11 @@
 
 # Production-Ready MLOps blueprint: Titanic Survival Prediction
 
+[![GitHub language](https://img.shields.io/github/languages/top/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification)
+[![GitHub license](https://img.shields.io/github/license/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/stargazers)
+[![Contributors](https://img.shields.io/github/contributors/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/graphs/contributors)
+
 Welcome to a robust, production-ready MLOps template for binary classification, built around the Titanic dataset. This project is designed for data scientists, ML engineers, and teams seeking a practical, end-to-end workflow for collaborative, reproducible machine learning. It demonstrates best practices in data ingestion, preprocessing, model training, evaluation, experiment tracking, and deployment using MLflow, Docker, and FastAPI.
 
 ## Who Is This For?
