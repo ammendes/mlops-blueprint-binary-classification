@@ -12,3 +12,4 @@ pydantic
 numpy
 pyyaml
 pytest
+pytest-cov
