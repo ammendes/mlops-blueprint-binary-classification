@@ -1,9 +1,5 @@
 # MLOps Blueprint: Binary Classification Pipeline with Random Forest
 
-Robust, reproducible, and deployable workflow for tabular data using Docker, MLflow, and FastAPI
-
-Example: Predicting Titanic survival outcome from passenger features
-
 ![Python 3](https://img.shields.io/badge/python-3-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/stargazers)
@@ -11,7 +7,7 @@ Example: Predicting Titanic survival outcome from passenger features
 ![Coverage](https://img.shields.io/codecov/c/github/ammendes/mlops-blueprint-binary-classification/main?label=coverage)
 ![Build](https://github.com/ammendes/mlops-blueprint-binary-classification/actions/workflows/test_with_coverage.yml/badge.svg)
 
-Welcome to a robust, production-ready MLOps template for binary classification, built around the Titanic dataset. This project is designed for data scientists, ML engineers, and teams seeking a practical, end-to-end workflow for collaborative, reproducible machine learning. It demonstrates best practices in data ingestion, preprocessing, model training, evaluation, experiment tracking, and deployment using MLflow, Docker, and FastAPI.
+This is a robust, production-ready MLOps template for binary classification, built around the Titanic dataset. This project is designed for data scientists, ML engineers, and teams seeking a practical, end-to-end workflow for collaborative, reproducible machine learning. It demonstrates best practices in data ingestion, preprocessing, model training, evaluation, experiment tracking, and deployment using MLflow, Docker, and FastAPI.
 
 ## Who Is This For?
 - **Data scientists and ML engineers** looking for a proven template to accelerate real-world projects.
