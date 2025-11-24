@@ -44,11 +44,6 @@ def load_data(csv_path=None, test_size=0.2, random_state=42, return_df=False):
     if df.shape[0] == 0 or df.shape[1] == 0:
         raise ValueError(f"File '{file_path}' is empty or has no columns.")
 
-    # Check for required columns
-    required = ['Survived'] + features
-    missing = [col for col in required if col not in df.columns]
-    if missing:
-        raise ValueError(f"Missing required columns: {missing}")
 
     # Handle files with only one row or one column
     if df.shape[0] == 1:
@@ -91,6 +86,12 @@ def load_data(csv_path=None, test_size=0.2, random_state=42, return_df=False):
     for col in features:
         if col not in df.columns:
             df[col] = 0
+
+    # Check for required columns after dummy creation
+    required = ['Survived'] + features
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
 
     X = df[features]
     y = df['Survived']

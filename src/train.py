@@ -2,7 +2,7 @@ import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix, roc_curve, roc_auc_score
-from data_loader import load_data
+from src.data_loader import load_data
 import json
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -33,9 +33,21 @@ def main():
     # Set MLflow experiment from config
     mlflow.set_experiment(config['mlflow']['experiment_name'])
 
+    # Get artifact location from env or config, handle literal string from config.yaml
+    artifact_location = os.environ.get("MLFLOW_ARTIFACT_LOCATION")
+    if not artifact_location:
+        raw_location = config['mlflow'].get('artifact_location', './mlruns')
+        # If config contains a literal string with env expansion, use default
+        if raw_location.startswith('${MLFLOW_ARTIFACT_LOCATION'):
+            artifact_location = './mlruns'
+        else:
+            artifact_location = raw_location
+
     # Start MLflow run
     with mlflow.start_run():
-        
+        # Set artifact location as a tag (for tracking)
+        mlflow.set_tag("mlflow.artifact_location", artifact_location)
+
         # Define parameter logging
         mlflow.log_params(params)
 
@@ -97,9 +109,11 @@ def main():
             json.dump(report, f)
         mlflow.log_artifact(report_path, artifact_path="reports")
 
-        # Log model
+        # Log model with input_example for signature
         print("Logging model...")
-        mlflow.sklearn.log_model(clf, name="model")
+        import numpy as np
+        input_example = np.zeros((1, X_train.shape[1]))
+        mlflow.sklearn.log_model(clf, name="model", input_example=input_example)
 
         # Clean up temporary directory
         shutil.rmtree(tmp_dir)

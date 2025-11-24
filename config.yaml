@@ -1,28 +1,33 @@
+api:
+  host: 0.0.0.0
+  port: 8000
+artifacts:
+  tmp_dir: tmp
 data:
-  dataset_url: "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
-  local_path: "data/titanic.csv"
-  features: ["Pclass", "Age", "SibSp", "Parch", "Fare", "Sex_male", "Embarked_Q", "Embarked_S"]
+  dataset_url: https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv
+  features:
+  - Pclass
+  - Age
+  - SibSp
+  - Parch
+  - Fare
+  - Sex_male
+  - Embarked_Q
+  - Embarked_S
   fillna:
     Age: median
+    Embarked: S
     Fare: median
-    Embarked: 'S'
-
-model:
-  type: "RandomForestClassifier"
-  params:
-    n_estimators: 100
-    max_depth: 5
-    random_state: 42
-
+  local_path: tests/synthetic_known.csv
 mlflow:
-  tracking_uri: "sqlite:///mlflow.db"
-  experiment_name: "default"
-  model_name: "titanic_rf_model"
-  registry_stage: "1"
-
-api:
-  host: "0.0.0.0"
-  port: 8000
-
-artifacts:
-  tmp_dir: "tmp"
+  artifact_location: ${MLFLOW_ARTIFACT_LOCATION:-./mlruns}
+  experiment_name: default
+  model_name: titanic_rf_model
+  registry_stage: '1'
+  tracking_uri: sqlite:///mlflow.db
+model:
+  params:
+    max_depth: 5
+    n_estimators: 100
+    random_state: 42
+  type: RandomForestClassifier

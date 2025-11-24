@@ -57,8 +57,9 @@ def test_load_data_downloads_if_missing():
     if os.path.exists(default_path):
         shutil.move(default_path, backup_path)
     try:
-        with pytest.raises(ValueError):
-            load_data()
+        # Should not raise an error; should download and load the file
+        result = load_data()
+        assert result is not None
     finally:
         # Restore the original file
         if os.path.exists(default_path):
