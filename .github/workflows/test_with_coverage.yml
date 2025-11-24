@@ -23,6 +23,9 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
+      - name: Clean MLflow runs directory
+        run: rm -rf ./mlruns
+
       - name: Set MLflow artifact location
         run: echo "MLFLOW_ARTIFACT_LOCATION=./mlruns" >> $GITHUB_ENV
 
