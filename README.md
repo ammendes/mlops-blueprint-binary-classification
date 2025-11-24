@@ -1,8 +1,8 @@
-MLOps Blueprint: Binary Classification Pipeline with Random Forest (Titanic Example)
+# MLOps Blueprint: Binary Classification Pipeline with Random Forest
 
-Robust, reproducible, and deployable workflow for tabular data using MLflow, Docker, and FastAPI
+Robust, reproducible, and deployable workflow for tabular data using Docker, MLflow, and FastAPI
 
-Example: Predicting Titanic survival outcome
+Example: Predicting Titanic survival outcome from passenger features
 
 ![Python 3](https://img.shields.io/badge/python-3-brightgreen.svg)
 [![GitHub license](https://img.shields.io/github/license/ammendes/mlops-blueprint-binary-classification)](https://github.com/ammendes/mlops-blueprint-binary-classification/blob/main/LICENSE)
